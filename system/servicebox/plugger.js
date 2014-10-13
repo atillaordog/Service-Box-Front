@@ -1,0 +1,3 @@
+ServiceBox.plugger = {
+	name : 'Plugger'
+};
