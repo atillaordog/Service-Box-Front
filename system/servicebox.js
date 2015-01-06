@@ -1,10 +1,19 @@
 var ServiceBox = {
 	
 	/**
+	 * @var ServiceBox.config The object that holds the system configuration
+	 */
+	config : null,
+	
+	/**
 	 * @var Array The dependencies that need to be loaded for the system to work
 	 */
 	dependencies : [
-		{url : 'system/servicebox/plugger.js', loaded : false}
+		{url : 'system/servicebox/config.js', loaded : false},
+		{url : 'system/servicebox/icon.js', loaded : false},
+		{url : 'system/servicebox/box.js', loaded : false},
+		{url : 'system/servicebox/plugger.js', loaded : false},
+		{url : 'system/servicebox/events.js', loaded : false}
 	],
 	
 	/**
@@ -23,11 +32,60 @@ var ServiceBox = {
 	plugger : null,
 	
 	/**
+	 * @var jQuery Object Holds the main window container
+	 */
+	box_container : null,
+	
+	/**
+	 * @var jQuery Object Holds the main icon container
+	 */
+	icon_container : null,
+	
+	/**
 	 * Used instead of the constructor, inits the system, loads files, etc
 	 */
 	initSystem : function()
 	{
+		this.blockSystem();
 		this.loadDependencies();
+		
+		var context = this;
+		var max_loading_iterations = 40;
+		var intervalID = setInterval(function(){
+			if ( context.nr_loaded_deps == context.dependencies.length )
+			{
+				clearInterval(intervalID);
+				intervalID = false;
+				context.unblockSystem();
+				
+				context.plugger.loadServices('/');
+				
+				context.box_container = $('#window-container');
+				context.icon_container = $('#icon-holder');
+				
+				context.events.init();
+				
+				context.runSystem();
+			}
+			
+			max_loading_iterations--;
+			
+			if ( max_loading_iterations <= 0 )
+			{
+				context.displayException('Could not load dependencies');
+				clearInterval(intervalID);
+				intervalID = false;
+				context.unblockSystem();
+			}
+		}, 100);
+	},
+	
+	/**
+	 * This is the main execution of the system, add all code here that needs to be run after system initialization
+	 */
+	runSystem : function()
+	{
+		console.log(this);
 	},
 	
 	/**
@@ -37,38 +95,15 @@ var ServiceBox = {
 	{	
 		var context = this;
 		
-		context.blockSystem();
-		
 		$.each(this.dependencies, function(index, value){
 			$.getScript(value.url).done( function( script, textStatus ) {
 				context.dependencies[index].loaded = true;
 				context.nr_loaded_deps++;
 			})
 			.fail( function( jqxhr, settings, exception ) {
-				console.log('Loading dependancy failed.');
+				console.log('Loading dependancy "'+value.url+'" failed.');
 			});
 		});
-		
-		context.loading_iterations = 0;
-		
-		var intervalIdentifier = setInterval(function(){
-			if ( context.nr_loaded_deps == context.dependencies.length )
-			{
-				context.unblockSystem();
-				clearInterval(intervalIdentifier);
-				delete context.loading_iterations;
-			}
-			
-			context.loading_iterations++;
-			
-			if ( context.loading_iterations >= 20 )
-			{
-				context.unblockSystem();
-				context.displayException('Could not load dependencies, please try to refresh the page.');
-				clearInterval(intervalIdentifier);
-				delete context.loading_iterations;
-			}
-		}, 100);
 	},
 	
 	/**
@@ -108,4 +143,5 @@ var ServiceBox = {
 
 $(document).ready(function(){
 	ServiceBox.initSystem();
+	
 });
