@@ -3,12 +3,12 @@ ServiceBox.events =
 	init : function()
 	{
 		this.addIconEvents();
-		this.addWindowActionEvents;
+		this.addWindowActionEvents();
 	},
 	
 	addIconEvents : function()
 	{
-		$('body').on('click', '.icon-link', function(){
+		$('body').on('click', '.icon-action', function(){
 			var id = $(this).attr('id');
 			
 			slug = id.split('-');

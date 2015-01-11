@@ -22,6 +22,12 @@ ServiceBox.box =
 		this.instance.find('.window-content').html(content);
 	},
 	
+	setSizes : function(width, height)
+	{
+		this.instance.css('width', width);
+		this.instance.find('window-content').css('height', height);
+	},
+	
 	render : function()
 	{
 		return this.instance;

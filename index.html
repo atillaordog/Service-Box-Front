@@ -12,11 +12,44 @@
 		<link href="assets/css/system.css" rel="stylesheet">
 	</head>
 	<body>
-		
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="/">ServiceBox</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a href="http://attilaordog.wordpress.com">Contact</a></li>
+				<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+				  <ul class="dropdown-menu" role="menu">
+					<li><a href="#">Action</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Another action</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12" id="icon-holder">
 					
+				</div>
+				<div class="text-primary col-xs-12 clearfix">
+					<div class="row">
+					<hr>
+					</div>
 				</div>
 				<div class="col-xs-12">
 					<div class="row" id="window-container">
@@ -26,21 +59,7 @@
 			</div>
 		</div>
 		
-		<div class="panel panel-default window" style="display:none;" id="blank_window">
-			<div class="panel-heading">
-				<h5 class="window-actions">
-					&nbsp;
-					<a href="javascript:void(0);" class="close-window pull-right"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></a>
-				</h5>
-				<h4 class="window-header">
-				</h4>
-			</div>
-			<div class="panel-body window-content">
-			</div>
-		</div>
-		
-		<div class="col-xs-1" style="display:none;" id="blank_icon">
-			<a href="javascript:void(0);" id="_" class="icon-link text-center"></a>
+		<div class="components-holder" style="display:none;">
 		</div>
 		
 		<script src="vendor/jquery-1.11.1.min.js"></script>

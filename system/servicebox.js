@@ -10,16 +10,31 @@ var ServiceBox = {
 	 */
 	dependencies : [
 		{url : 'system/servicebox/config.js', loaded : false},
-		{url : 'system/servicebox/icon.js', loaded : false},
-		{url : 'system/servicebox/box.js', loaded : false},
+		{url : 'system/servicebox/components/icon/icon.js', loaded : false},
+		{url : 'system/servicebox/components/box/box.js', loaded : false},
+		{url : 'system/servicebox/components/popup/popup.js', loaded : false},
 		{url : 'system/servicebox/plugger.js', loaded : false},
 		{url : 'system/servicebox/events.js', loaded : false}
+	],
+	
+	/**
+	 * @var Array The html components needed to run the system
+	 */
+	components : [
+		{url : 'system/servicebox/components/icon/icon.html', loaded : false},
+		{url : 'system/servicebox/components/box/box.html', loaded : false},
+		{url : 'system/servicebox/components/popup/popup.html', loaded : false}
 	],
 	
 	/**
 	 * @var int Number of loaded dependencies to check if all dependencies were loaded
 	 */
 	nr_loaded_deps : 0,
+	
+	/**
+	 * @var int Number of loaded components
+	 */
+	nr_loaded_components : 0,
 	
 	/**
 	 * @var Array Contains all the services as unique_key => Service
@@ -42,17 +57,25 @@ var ServiceBox = {
 	icon_container : null,
 	
 	/**
+	 * @var jQuery Object Holds the container for components
+	 */
+	components_container : null,
+	
+	/**
 	 * Used instead of the constructor, inits the system, loads files, etc
 	 */
 	initSystem : function()
 	{
+		this.components_container = $('.components-holder');
+		
 		this.blockSystem();
 		this.loadDependencies();
+		this.loadComponents();
 		
 		var context = this;
 		var max_loading_iterations = 40;
 		var intervalID = setInterval(function(){
-			if ( context.nr_loaded_deps == context.dependencies.length )
+			if ( context.nr_loaded_deps == context.dependencies.length && context.nr_loaded_components == context.components.length )
 			{
 				clearInterval(intervalID);
 				intervalID = false;
@@ -102,6 +125,26 @@ var ServiceBox = {
 			})
 			.fail( function( jqxhr, settings, exception ) {
 				console.log('Loading dependancy "'+value.url+'" failed.');
+			});
+		});
+	},
+	
+	loadComponents : function()
+	{
+		var context = this;
+		
+		$.each(this.components, function(index, value){
+			$.ajax({
+				url : value.url,
+				cache : false,
+				async : false,
+				dataType : 'html'
+			}).done(function(data){
+				context.components_container.append(data);
+				context.components[index].loaded = true;
+				context.nr_loaded_components++;
+			}).fail(function(data){
+				ServiceBox.box.addContent('Failed to load component '+value.url);
 			});
 		});
 	},

@@ -1,14 +1,14 @@
 ServiceBox.temp_service = 
 {
-	slug : 'calculator',
+	slug : 'radio',
 	
-	name : 'Calculator',
+	name : 'Online radio',
 	
-	description : 'A small and simple calculator',
+	description : 'Small online radio with three stations',
 	
 	getIcon : function()
 	{
-		return 'http://static.cfnet.ro/media/calculator-icon2.jpg';
+		return 'http://static.allmyapps.com/data/apps/3/4/3455/dd1321191aaf1b89e4549231d96b93cd_icon.png';
 	},
 	
 	run : function()
@@ -17,19 +17,19 @@ ServiceBox.temp_service =
 		ServiceBox.box.addTitle(this.name);
 		
 		$.ajax({
-			url : 'system/services/calculator/vendor/calculator.html',
+			url : 'system/services/radio/vendor/radio.html',
 			cache : false,
 			async : false,
 			dataType : 'html'
 		}).done(function(data){
 			ServiceBox.box.addContent(data);
 		}).fail(function(data){
-			ServiceBox.box.addContent('Failed to load calculator.');
+			ServiceBox.box.addContent('Failed to load radio.');
 			console.log(data);
 		});
 		
 		var win = ServiceBox.box.render();
-		win.css('max-width', '400px');
+		win.css('max-width', '300px');
 		ServiceBox.box_container.append(win);
 	}
 }

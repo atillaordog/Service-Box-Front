@@ -1,34 +1,30 @@
-<FORM NAME="Calc">
-<TABLE BORDER=4>
-<TR>
-<TD>
-<INPUT TYPE="text"   NAME="Input" Size="16">
-<br>
-</TD>
-</TR>
-<TR>
-<TD>
-<INPUT TYPE="button" NAME="one"   VALUE="  1  " OnClick="Calc.Input.value += '1'">
-<INPUT TYPE="button" NAME="two"   VALUE="  2  " OnCLick="Calc.Input.value += '2'">
-<INPUT TYPE="button" NAME="three" VALUE="  3  " OnClick="Calc.Input.value += '3'">
-<INPUT TYPE="button" NAME="plus"  VALUE="  +  " OnClick="Calc.Input.value += ' + '">
-<br>
-<INPUT TYPE="button" NAME="four"  VALUE="  4  " OnClick="Calc.Input.value += '4'">
-<INPUT TYPE="button" NAME="five"  VALUE="  5  " OnCLick="Calc.Input.value += '5'">
-<INPUT TYPE="button" NAME="six"   VALUE="  6  " OnClick="Calc.Input.value += '6'">
-<INPUT TYPE="button" NAME="minus" VALUE="  -  " OnClick="Calc.Input.value += ' - '">
-<br>
-<INPUT TYPE="button" NAME="seven" VALUE="  7  " OnClick="Calc.Input.value += '7'">
-<INPUT TYPE="button" NAME="eight" VALUE="  8  " OnCLick="Calc.Input.value += '8'">
-<INPUT TYPE="button" NAME="nine"  VALUE="  9  " OnClick="Calc.Input.value += '9'">
-<INPUT TYPE="button" NAME="times" VALUE="  x  " OnClick="Calc.Input.value += ' * '">
-<br>
-<INPUT TYPE="button" NAME="clear" VALUE="  c  " OnClick="Calc.Input.value = ''">
-<INPUT TYPE="button" NAME="zero"  VALUE="  0  " OnClick="Calc.Input.value += '0'">
-<INPUT TYPE="button" NAME="DoIt"  VALUE="  =  " OnClick="Calc.Input.value = eval(Calc.Input.value)">
-<INPUT TYPE="button" NAME="div"   VALUE="  /  " OnClick="Calc.Input.value += ' / '">
-<br>
-</TD>
-</TR>
-</TABLE>
-</FORM>
+	    <span>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="350" height="430" id="CalculatorID" title="Embed Calculator">
+        <param name="movie" value="http://www.embedcalculator.com/flash/StandardCalculator.swf" />
+        <param name="quality" value="high" />
+        <param name="wmode" value="opaque" />
+        <param name="swfversion" value="9.0.45.0" />
+        <!-- This param tag prompts users with Flash Player 6.0 r65 and higher to download the latest version of Flash Player. Delete it if you don't want users to see the prompt. -->
+        <param name="expressinstall" value="http://www.embedcalculator.com/Scripts/expressInstall.swf" />
+        <!-- Next object tag is for non-IE browsers. So hide it from IE using IECC. -->
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="http://www.embedcalculator.com/flash/StandardCalculator.swf" width="350" height="430">
+          <!--<![endif]-->
+          <param name="quality" value="high" />
+          <param name="wmode" value="opaque" />
+          <param name="swfversion" value="9.0.45.0" />
+          <param name="expressinstall" value="http://www.embedcalculator.com/Scripts/expressInstall.swf" />
+          <!-- The browser displays the following alternative content for users with Flash Player 6.0 and older. -->
+          <div>
+            <h4><a href="http://www.embedcalculator.com">Embed Calculator</a> requires a newer version of Adobe Flash Player.</h4>
+            <p>You must have the current version of the adobe flash player to use this <a href="http://www.embedcalculator.com">online calculator</a>.</p>
+          </div>
+          <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+      </object>
+            </span>
+			<script type="text/javascript">
+            swfobject.registerObject("CalculatorID");
+            </script>
+    

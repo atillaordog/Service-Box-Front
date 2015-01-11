@@ -1,14 +1,14 @@
 ServiceBox.temp_service = 
 {
-	slug : 'calculator',
+	slug : 'horde_siege',
 	
-	name : 'Calculator',
+	name : 'Horde Siege',
 	
-	description : 'A small and simple calculator',
+	description : 'Horde Siege game',
 	
 	getIcon : function()
 	{
-		return 'http://static.cfnet.ro/media/calculator-icon2.jpg';
+		return 'http://wiki.guildwars.com/images/d/d5/Junundu_Siege.jpg';
 	},
 	
 	run : function()
@@ -17,19 +17,20 @@ ServiceBox.temp_service =
 		ServiceBox.box.addTitle(this.name);
 		
 		$.ajax({
-			url : 'system/services/calculator/vendor/calculator.html',
+			url : 'system/services/horde_siege/horde_siege.html',
 			cache : false,
 			async : false,
 			dataType : 'html'
 		}).done(function(data){
 			ServiceBox.box.addContent(data);
+		
 		}).fail(function(data){
-			ServiceBox.box.addContent('Failed to load calculator.');
+			ServiceBox.box.addContent('Failed to load radio.');
 			console.log(data);
 		});
 		
 		var win = ServiceBox.box.render();
-		win.css('max-width', '400px');
+		win.css('max-width', '680px');
 		ServiceBox.box_container.append(win);
 	}
 }

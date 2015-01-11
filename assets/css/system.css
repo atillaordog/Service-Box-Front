@@ -13,3 +13,8 @@
 	left:40%;
 	top:20%;
 }
+
+.window {
+	float:left;
+	margin: 5px;
+}

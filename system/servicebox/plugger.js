@@ -15,7 +15,9 @@ ServiceBox.plugger = {
 			$.getScript('system/services/'+value.slug+'/'+value.slug+'.js').done( function( script, textStatus ) {
 				ServiceBox.services[value.slug] = ServiceBox.temp_service;
 				
-				ServiceBox.icon_container.append( ServiceBox.icon.create(ServiceBox.temp_service.slug, ServiceBox.temp_service.getIcon()) );
+				var icon = ServiceBox.icon.create(ServiceBox.temp_service.slug, ServiceBox.temp_service.getIcon(), ServiceBox.temp_service.name);
+				
+				ServiceBox.icon_container.append( icon );
 			})
 			.fail( function( jqxhr, settings, exception ) {
 				console.log('Loading service '+value.slug+' failed.');

@@ -1,14 +1,14 @@
 ServiceBox.temp_service = 
 {
-	slug : 'calculator',
+	slug : 'pixlr',
 	
-	name : 'Calculator',
+	name : 'Image Editor',
 	
-	description : 'A small and simple calculator',
+	description : 'Image Editor',
 	
 	getIcon : function()
 	{
-		return 'http://static.cfnet.ro/media/calculator-icon2.jpg';
+		return 'http://i.i.cbsi.com/cnwk.1d/i/tim2/2014/05/21/Foreman_13743709_408_icon_64x64.png';
 	},
 	
 	run : function()
@@ -17,19 +17,19 @@ ServiceBox.temp_service =
 		ServiceBox.box.addTitle(this.name);
 		
 		$.ajax({
-			url : 'system/services/calculator/vendor/calculator.html',
+			url : 'system/services/pixlr/frame.html',
 			cache : false,
 			async : false,
 			dataType : 'html'
 		}).done(function(data){
 			ServiceBox.box.addContent(data);
 		}).fail(function(data){
-			ServiceBox.box.addContent('Failed to load calculator.');
+			ServiceBox.box.addContent('Failed to load radio.');
 			console.log(data);
 		});
 		
 		var win = ServiceBox.box.render();
-		win.css('max-width', '400px');
+		win.css('max-width', '1100px');
 		ServiceBox.box_container.append(win);
 	}
 }
