@@ -1,0 +1,141 @@
+<div class="col-xs-12 car-wash-body car-wash-main">
+	<div class="col-xs-12 text-center car-wash-logo-holder">
+		<img src="system/services/car_wash/assets/logo.png" width="250">
+	</div>
+	<div class="clearfix">&nbsp;</div>
+	<div class="col-xs-12 text-center car-wash-current-time-holder">
+		<div class="center-block car-wash-current-time">12:30</div>
+	</div>
+	<div class="col-xs-12 col-sm-5 col-md-4 col-md-offset-1 text-center">
+		<button class="car-wash-add-car-button">Adauga Masina</button>
+	</div>
+	<div class="col-xs-12 col-sm-2 text-center">
+		<div class="center-block car-wash-temperature">17 C</div>
+	</div>
+	<div class="col-xs-12 col-sm-5  col-md-4 text-center">
+		<button class="car-wash-car-list-button">Job List</button>
+	</div>
+	<div class="clearfix car-wash-margin-bottom">&nbsp;</div>
+</div>
+
+<div class="col-xs-12 car-wash-body car-wash-list"  style="display:none;">
+	<div class="car-wash-header row collapse navbar-collapse">
+		<div class="car-wash-header-title col-xs-12 col-sm-4">
+			JOB LIST
+		</div>
+		<div class="car-wash-header-time  col-xs-12 col-sm-4">
+			12:30
+		</div>
+		<div class="car-wash-header-logo  col-xs-12 col-sm-4">
+			<img src="system/services/car_wash/assets/round_logo.png">
+		</div>
+	</div>
+	
+	<div class="row car-wash-red-line">
+		<hr>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-12 visible-xs-block">
+			<button type="button" class="visible-xs-inline car-wash-right-menu-toggle" data-toggle="collapse" data-target=".car-wash-right-menu">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="col-xs-12 col-sm-9 car-wash-list-holder">
+			<div class="row">
+				<div class="table-responsive">
+					<table class="table table-bordered car-wash-car-list-table">
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-3 car-wash-right-menu collapse in width" id="car-wash-right-menu">
+			<button class="car-wash-right-menu-button car-wash-start-car-button">
+				Start Spalare
+			</button>
+			<button class="car-wash-right-menu-button car-wash-ready-car-button">
+				Spalare Gata
+			</button>
+			<button class="car-wash-right-menu-button car-wash-suspend-car-button">
+				Suspenda
+			</button>
+			<button class="car-wash-right-menu-button car-wash-take-car-button">
+				Masina Luata
+			</button>
+			<button class="car-wash-right-menu-button car-wash-delete-car-button">
+				Sterge
+			</button>
+			<div class="clearix">&nbsp;</div>
+			<div class="car-wash-right-menu-legend row">
+				<div class="col-xs-10 col-xs-offset-1">
+					<span class="legend-box legend-completed">&nbsp;</span>
+					<span class="legend-text">Completed</span>
+				</div>
+				<div class="col-xs-10 col-xs-offset-1">
+					<span class="legend-box legend-processing">&nbsp;</span>
+					<span class="legend-text">Processing</span>
+				</div>
+				<div class="col-xs-10 col-xs-offset-1">
+					<span class="legend-box legend-suspended">&nbsp;</span>
+					<span class="legend-text">Suspended</span>
+				</div>
+				<div class="col-xs-10 col-xs-offset-1">
+					<span class="legend-box legend-waiting">&nbsp;</span>
+					<span class="legend-text">Waiting</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-xs-12 car-wash-body car-wash-add-car-form"  style="display:none;">
+	<div class="car-wash-header row collapse navbar-collapse">
+		<div class="car-wash-header-title col-xs-12 col-sm-4">
+			JOB LIST
+		</div>
+		<div class="car-wash-header-time  col-xs-12 col-sm-4">
+			12:30
+		</div>
+		<div class="car-wash-header-logo  col-xs-12 col-sm-4">
+			<img src="system/services/car_wash/assets/round_logo.png">
+		</div>
+	</div>
+	
+	<div class="row car-wash-red-line">
+		<hr>
+	</div>
+	
+	<div class="col-xs-12 col-sm-9 car-wash-form-holder">
+		<form class="add-car-form">
+		  <div class="form-group">
+			<input type="text" class="form-control big-input big-input-wide" id="plate_number" name="plate_number" placeholder="Nr. Inmatriculare">
+		  </div>
+		  <div class="form-group">
+			<input type="text" class="form-control big-input big-input-small" id="car_make" name="car_make" placeholder="Marca">
+			<input type="text" class="form-control big-input big-input-small pull-right" id="car_type" name="car_type" placeholder="Tipul">
+			<div class="clearfix">&nbsp;</div>
+		  </div>
+		  <div class="form-group">
+			<label class="checkbox-inline big-input-small big-input big-input-button">
+			  <input type="hidden" name="inside_wash" id="inside_wash" value="0"> Interior 
+			</label>
+			<label class="checkbox-inline big-input-small pull-right big-input big-input-button">
+			  <input type="hidden" name="outside_wash" id="outside_wash" value="0"> Exterior
+			</label>
+			<div class="clearfix">&nbsp;</div>
+		  </div>
+		  <div class="clearfix">&nbsp;</div>
+		</form>
+	</div>
+	
+	<div class="col-xs-12 col-sm-3 car-wash-right-menu">
+		<button class="car-wash-plus-button-xxl">
+			+
+		</button>
+	</div>
+</div>

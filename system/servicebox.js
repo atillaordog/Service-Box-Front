@@ -14,7 +14,10 @@ var ServiceBox = {
 		{url : 'system/servicebox/components/box/box.js', loaded : false},
 		{url : 'system/servicebox/components/popup/popup.js', loaded : false},
 		{url : 'system/servicebox/plugger.js', loaded : false},
-		{url : 'system/servicebox/events.js', loaded : false}
+		{url : 'system/servicebox/events.js', loaded : false},
+		{url : 'system/servicebox/communicator.js', loaded : false},
+		{url : 'system/servicebox/components/auth/auth.js', loaded : false},
+		{url : 'system/servicebox/lang.js', loaded : false}
 	],
 	
 	/**
@@ -62,6 +65,11 @@ var ServiceBox = {
 	components_container : null,
 	
 	/**
+	 * @var string Holds the currently used language
+	 */
+	current_lang : 'EN',
+	
+	/**
 	 * Used instead of the constructor, inits the system, loads files, etc
 	 */
 	initSystem : function()
@@ -87,6 +95,7 @@ var ServiceBox = {
 				context.icon_container = $('#icon-holder');
 				
 				context.events.init();
+				context.lang.loadTranslations();
 				
 				context.runSystem();
 			}
@@ -108,7 +117,11 @@ var ServiceBox = {
 	 */
 	runSystem : function()
 	{
-		console.log(this);
+		ServiceBox.auth.checkBackIsLoggedIn();
+		console.log('System ready');
+		
+		//$('#icon-link-car_wash').trigger('click');
+		//$('#window-car_wash .fullscreen-window').trigger('click');
 	},
 	
 	/**

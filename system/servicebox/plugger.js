@@ -18,6 +18,15 @@ ServiceBox.plugger = {
 				var icon = ServiceBox.icon.create(ServiceBox.temp_service.slug, ServiceBox.temp_service.getIcon(), ServiceBox.temp_service.name);
 				
 				ServiceBox.icon_container.append( icon );
+				
+				if ( ServiceBox.temp_service.hasOwnProperty('css') )
+				{
+					$('<link>')
+					  .addClass(ServiceBox.temp_service.slug+'-style-tag')
+					  .appendTo('head')
+					  .attr({type : 'text/css', rel : 'stylesheet'})
+					  .attr('href', ServiceBox.temp_service.css);
+				}
 			})
 			.fail( function( jqxhr, settings, exception ) {
 				console.log('Loading service '+value.slug+' failed.');

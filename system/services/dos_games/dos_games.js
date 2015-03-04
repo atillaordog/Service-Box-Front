@@ -30,7 +30,7 @@ ServiceBox.temp_service =
 		});
 		
 		var win = ServiceBox.box.render();
-		win.css('float', 'none');
+		win.css('width', '1100px');
 		ServiceBox.box_container.append(win);
 		
 		this.addEvents();

@@ -20,6 +20,11 @@ ServiceBox.popup = {
 		this.instance.find('.modal-dialog').addClass(this.sizes[size]);
 	},
 	
+	hideFooter : function()
+	{
+		this.instance.find('.modal-footer').hide();
+	},
+	
 	run : function()
 	{
 		$('#'+this.instance.attr('id')).modal();
