@@ -13,7 +13,7 @@
 		<div class="center-block car-wash-temperature">17 C</div>
 	</div>
 	<div class="col-xs-12 col-sm-5  col-md-4 text-center">
-		<button class="car-wash-car-list-button">Job List</button>
+		<button class="car-wash-car-list-button">LISTA MASINI</button>
 	</div>
 	<div class="clearfix car-wash-margin-bottom">&nbsp;</div>
 </div>
@@ -21,13 +21,15 @@
 <div class="col-xs-12 car-wash-body car-wash-list"  style="display:none;">
 	<div class="car-wash-header row collapse navbar-collapse">
 		<div class="car-wash-header-title col-xs-12 col-sm-4">
-			JOB LIST
+			LISTA MASINI
 		</div>
 		<div class="car-wash-header-time  col-xs-12 col-sm-4">
 			12:30
 		</div>
 		<div class="car-wash-header-logo  col-xs-12 col-sm-4">
+			<a href="javascript:void(0);" class="car-wash-back-home">
 			<img src="system/services/car_wash/assets/round_logo.png">
+			</a>
 		</div>
 	</div>
 	
@@ -65,7 +67,7 @@
 				Suspenda
 			</button>
 			<button class="car-wash-right-menu-button car-wash-take-car-button">
-				Masina Luata
+				Plata
 			</button>
 			<button class="car-wash-right-menu-button car-wash-delete-car-button">
 				Sterge
@@ -74,19 +76,19 @@
 			<div class="car-wash-right-menu-legend row">
 				<div class="col-xs-10 col-xs-offset-1">
 					<span class="legend-box legend-completed">&nbsp;</span>
-					<span class="legend-text">Completed</span>
+					<span class="legend-text" data-color_type="completed">Spalare Gata</span>
 				</div>
 				<div class="col-xs-10 col-xs-offset-1">
 					<span class="legend-box legend-processing">&nbsp;</span>
-					<span class="legend-text">Processing</span>
+					<span class="legend-text" data-color_type="processing">In parcurs</span>
 				</div>
 				<div class="col-xs-10 col-xs-offset-1">
 					<span class="legend-box legend-suspended">&nbsp;</span>
-					<span class="legend-text">Suspended</span>
+					<span class="legend-text" data-color_type="suspended">Suspendat</span>
 				</div>
 				<div class="col-xs-10 col-xs-offset-1">
 					<span class="legend-box legend-waiting">&nbsp;</span>
-					<span class="legend-text">Waiting</span>
+					<span class="legend-text" data-color_type="waiting">In asteptare</span>
 				</div>
 			</div>
 		</div>
@@ -96,13 +98,15 @@
 <div class="col-xs-12 car-wash-body car-wash-add-car-form"  style="display:none;">
 	<div class="car-wash-header row collapse navbar-collapse">
 		<div class="car-wash-header-title col-xs-12 col-sm-4">
-			JOB LIST
+			Adauga
 		</div>
 		<div class="car-wash-header-time  col-xs-12 col-sm-4">
 			12:30
 		</div>
 		<div class="car-wash-header-logo  col-xs-12 col-sm-4">
+			<a href="javascript:void(0);" class="car-wash-back-home">
 			<img src="system/services/car_wash/assets/round_logo.png">
+			</a>
 		</div>
 	</div>
 	
@@ -137,5 +141,23 @@
 		<button class="car-wash-plus-button-xxl">
 			+
 		</button>
+	</div>
+</div>
+
+<div class="car-wash-extra-things" style="display:none;">
+	<div class="car-wash-delegate-form">
+		<form class="submit-delegate-form">
+		  <div class="form-group">
+			<input type="text" class="form-control big-input big-input-wide" id="delegate_name" name="delegate_name" placeholder="Delegat">
+		  </div>
+		  <div class="form-group">
+			<input type="text" class="form-control big-input big-input-wide" id="delegate_phone" name="delegate_phone" placeholder="Telefon">
+		  </div>
+		  <div class="form-group">
+			<button class="big-input-wide big-input big-input-button">
+			Salveaza
+			</button>
+		  </div>
+		</form>
 	</div>
 </div>

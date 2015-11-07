@@ -26,7 +26,6 @@ ServiceBox.temp_service =
 		
 		}).fail(function(data){
 			ServiceBox.box.addContent('Failed to load radio.');
-			console.log(data);
 		});
 		
 		var win = ServiceBox.box.render();

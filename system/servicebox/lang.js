@@ -3,14 +3,14 @@ ServiceBox.lang = {
 	/**
 	 * @var array Holds all the loaded translations
 	 */
-	loaded_translations : null,
+	loaded_translations : [],
 	
 	loadTranslations : function()
 	{	
 		var context = this;
 		
 		$.getScript('system/lang/'+ServiceBox.current_lang+'.js').done( function( script, textStatus ) {
-			context.loaded_translations = ServiceBox.temp_lang;
+			context.loaded_translations.push(ServiceBox.temp_lang);
 			context.translatePage();
 		})
 		.fail( function( jqxhr, settings, exception ) {

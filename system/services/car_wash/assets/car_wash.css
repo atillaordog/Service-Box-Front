@@ -69,6 +69,7 @@
 .car-wash-header-title {
 	color:#fff;
 	font-size:60px;
+	line-height:220px;
 }
 
 .car-wash-header-time {
@@ -165,7 +166,7 @@
 	color:#fff;
 	height:40px;
 	line-height:60px;
-	font-size:30px;
+	font-size:25px;
 }
 
 .car-wash-car-list-table tr.completed td, .car-wash-right-menu-legend .legend-completed {
@@ -208,7 +209,7 @@
 	padding:0;
 }
 
-.car-wash-add-car-form .big-input {
+.car-wash-add-car-form .big-input, .car-wash-delegate-form .big-input {
 	height:100px;
 	line-height:100px;
 	font-size:56px;
@@ -220,17 +221,17 @@
 	margin:60px auto;
 }
 
-.car-wash-add-car-form .add-car-form .big-input-wide {
+.car-wash-add-car-form .add-car-form .big-input-wide, .car-wash-delegate-form .big-input-wide {
 	width:100%;
 }
 
-.car-wash-add-car-form .add-car-form .big-input-small {
+.car-wash-add-car-form .add-car-form .big-input-small, .car-wash-delegate-form .big-small {
 	width:48%;
 	float:left;
 	margin:0;
 }
 
-.car-wash-add-car-form .add-car-form .big-input-button {
+.car-wash-add-car-form .add-car-form .big-input-button, .car-wash-delegate-form .big-input-button {
 	border:1px solid #ccc;
 	background-color:#fff;
 	background-image: none;
@@ -240,7 +241,7 @@
 	overflow:hidden;
 }
 
-.car-wash-add-car-form .add-car-form .big-input-button.selected {
+.car-wash-add-car-form .add-car-form .big-input-button.selected, .car-wash-delegate-form .big-input.selected {
 	background-color:#30B834;
 }
 
@@ -257,3 +258,11 @@
 		margin:20px auto;
 	}
 }
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; font-size: 56px;}
+.autocomplete-no-suggestion { padding: 2px 5px;}
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: bold; color: #000; font-size: 56px;}
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { font-weight: bold; font-size: 56px; color: #000; display: block; border-bottom: 1px solid #000; }

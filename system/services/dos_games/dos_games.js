@@ -38,28 +38,35 @@ ServiceBox.temp_service =
 	
 	addEvents : function()
 	{
+		var parentClass = '.panel-body';
+		
 		$('body').on('click', '.dos-games-list a', function(e){
 			e.preventDefault();
+			
+			var parent = $(this).parents(parentClass);
 			
 			var iframe = $('<iframe>');
 			iframe.attr('src', $(this).attr('href'));
 			iframe.attr('width', '800px');
 			iframe.attr('height', '600px');
 			
-			$('.dos-games-emulator-holder').html(iframe);
+			parent.find('.dos-games-emulator-holder').html(iframe);
 		});
 		
 		$('body').on('change keyup', '.dos-games-search-field', function(){
+			
+			var parent = $(this).parents(parentClass);
+			
 			var s = $(this).val();
-			console.log(s);
+			
 			if ( $.trim(s) == "" )
 			{
-				$('.dos-games-list li').show();
+				parent.find('.dos-games-list li').show();
 			}
 			else
 			{
 				var result = $('.dos-games-list').find('li:Contains("'+s+'")');
-				$('.dos-games-list li').hide();
+				parent.find('.dos-games-list li').hide();
 				result.each(function(){
 					$(this).show();
 				});

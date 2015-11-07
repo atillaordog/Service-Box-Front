@@ -36,6 +36,7 @@ ServiceBox.temp_service =
 		
 		this.addEvents();
 		this.startClock();
+		this.initCarsAutocomplete();
 		
 		var context = this;
 		var clock = setInterval(function(){
@@ -54,19 +55,23 @@ ServiceBox.temp_service =
 	addEvents : function()
 	{
 		var context = this;
+		var parentClass = '.panel-body';
 		
 		$('body').on('click', '.car-wash-add-car-button', function(){
-			$('.car-wash-main').hide();
-			$('.car-wash-add-car-form').show();
+			var parent = $(this).parents(parentClass);
+			parent.find('.car-wash-main').hide();
+			parent.find('.car-wash-add-car-form').show();
 		});
 		
 		$('body').on('click', '.car-wash-car-list-button', function(){
-			$('.car-wash-main').hide();
-			$('.car-wash-list').show();
-			$('.car-wash-car-list-table tbody').html('');
+			var parent = $(this).parents(parentClass);
+			
+			parent.find('.car-wash-main').hide();
+			parent.find('.car-wash-list').show();
+			parent.find('.car-wash-car-list-table tbody').html('');
 			
 			$(window).trigger('resize');
-			$('.car-wash-right-menu-button').hide();
+			parent.find('.car-wash-right-menu-button').hide();
 			
 			ServiceBox.communicator.getData(context.slug, 'car', {status:[0,1,2,3], date_created : context.getCurrentTimeinDateTimeFormat()});
 			var response = ServiceBox.communicator.getResponse();
@@ -84,50 +89,56 @@ ServiceBox.temp_service =
 					tr += '<td>'+((car.inside_wash)? 'interior' : '')+((car.inside_wash && car.outside_wash)? ' / ' : '')+((car.outside_wash)? 'exterior' : '')+'</td>';
 					tr += '</tr>';
 					
-					$('.car-wash-car-list-table tbody').append(tr);
+					parent.find('.car-wash-car-list-table tbody').append(tr);
 				}
 			}
+			
+			context.setListColorNumbers();
 		});
 		
 		$('body').on('click', '.car-wash-car-list-table tbody tr td', function(){
+			var parent = $(this).parents(parentClass);
+			
 			if ( $(this).parents('tr').hasClass('selected') )
 			{
 				$(this).parents('tr').removeClass('selected');
-				$('.car-wash-right-menu-button').hide();
+				parent.find('.car-wash-right-menu-button').hide();
 			}
 			else
 			{
-				$('.car-wash-car-list-table tbody tr').removeClass('selected');
-				$('.car-wash-right-menu-button').hide();
+				parent.find('.car-wash-car-list-table tbody tr').removeClass('selected');
+				parent.find('.car-wash-right-menu-button').hide();
 				$(this).parents('tr').addClass('selected');
 				
 				var status = $(this).parents('tr').data('status_id');
-				$('.car-wash-delete-car-button').show();
+				parent.find('.car-wash-delete-car-button').show();
 				if ( status == 0 )
 				{
-					$('.car-wash-start-car-button').show();
-					$('.car-wash-suspend-car-button').show();
+					parent.find('.car-wash-start-car-button').show();
+					parent.find('.car-wash-suspend-car-button').show();
 				}
 				
 				if ( status == 1 )
 				{
-					$('.car-wash-ready-car-button').show();
+					parent.find('.car-wash-ready-car-button').show();
 				}
 				
 				if ( status == 2 )
 				{
-					$('.car-wash-take-car-button').show();
+					parent.find('.car-wash-take-car-button').show();
 				}
 				
 				if ( status == 3 )
 				{
-					$('.car-wash-start-car-button').show();
+					parent.find('.car-wash-start-car-button').show();
 				}
 			}
 		});
 		
 		$('body').on('submit', '.car-wash-add-car-form .add-car-form', function(e){
 			e.preventDefault();
+			
+			var parent = $(this).parents(parentClass);
 			
 			var form_data = $(this).serializeArray();
 			var obj = {};
@@ -143,57 +154,67 @@ ServiceBox.temp_service =
 			
 			if ( response.success )
 			{
-				$('.car-wash-content-holder').html('');
+				parent.find('.car-wash-content-holder').html('');
 				
 				ServiceBox.popup.create('add_car', 'Adauga Masina', 'Masina adaugata cu success');
 				ServiceBox.popup.run();
 				
-				$('.car-wash-main').show();
-				$('.car-wash-add-car-form').hide();
+				parent.find('.car-wash-main').show();
+				parent.find('.car-wash-add-car-form').hide();
 			}
 			else
 			{
 				$(this).find('.help-block').remove();
 				
 				$.each(response.errors, function(index, value){
-					$('input[name="'+index+'"]').parents('.form-group').append('<span class="help-block" style="color:red;">'+value+'</span>');
+					parent.find('input[name="'+index+'"]').parents('.form-group').append('<span class="help-block" style="color:red;">'+value+'</span>');
 				});
 			}
 		});
 		
 		$('body').on('click', '.car-wash-plus-button-xxl', function(){
-			$('.car-wash-add-car-form .add-car-form').submit();
+			var parent = $(this).parents(parentClass);
+			
+			parent.find('.car-wash-add-car-form .add-car-form').submit();
 		});
 		
 		$('body').on('click', '.car-wash-delete-car-button', function(){
-			var id = $('.car-wash-car-list-table tbody tr.selected').data('car_id');
+			var parent = $(this).parents(parentClass);
+			
+			var id = parent.find('.car-wash-car-list-table tbody tr.selected').data('car_id');
 			
 			ServiceBox.communicator.deleteData(context.slug, id, 'car');
 			var response = ServiceBox.communicator.getResponse();
 			
 			if ( response.success )
 			{
-				$('.car-wash-content-holder').html('');
-				$('.car-wash-car-list-button').trigger('click');
+				parent.find('.car-wash-content-holder').html('');
+				parent.find('.car-wash-car-list-button').trigger('click');
 				
 				ServiceBox.popup.create('delete_car', 'Sterge Masina', 'Masina stearsa cu success');
 				ServiceBox.popup.run();
-				$('.car-wash-main').show();
-				$('.car-wash-list').hide();
+				parent.find('.car-wash-main').show();
+				parent.find('.car-wash-list').hide();
 			}
 			else
 			{
 				ServiceBox.popup.create('delete_car', 'Sterge Masina', 'Masina nu se poeate sterge');
 				ServiceBox.popup.run();
-				$('.car-wash-main').show();
-				$('.car-wash-list').hide();
+				parent.find('.car-wash-main').show();
+				parent.find('.car-wash-list').hide();
 			}
+			
+			context.setListColorNumbers();
 		});
 		
 		$('body').on('click', '.car-wash-right-menu-button', function(){
+			var parent = $(this).parents(parentClass);
 			
 			var status = 0;
 			var statusText = '';
+			
+			var id = parent.find('.car-wash-car-list-table tbody tr.selected').data('car_id');
+			
 			if ( $(this).hasClass('car-wash-start-car-button') )
 			{
 				status = 1;
@@ -211,26 +232,59 @@ ServiceBox.temp_service =
 			}
 			if ( $(this).hasClass('car-wash-take-car-button') )
 			{
-				status = 9;
-				statusText = 'Masina a fost luata.';
+				var delegate_data = $('.car-wash-delegate-form').first().clone();
+				delegate_data.find('form').append('<input type="hidden" name="car_id" id="car_id" value="'+id+'">');
+				
+				ServiceBox.popup.create('delegate_form', 'Delegat', delegate_data);
+				ServiceBox.popup.run();
+				
+				$('.car-wash-delegate-form input[type="text"]').autocomplete({
+					minChars : 3,
+					lookup : function(query, done){
+						var name_search_data = {delegate_name : query};
+						var telephone_search_data = {delegate_phone : query};
+						
+						ServiceBox.communicator.searchData('car_wash', 'delegate', name_search_data);
+						var name_response = ServiceBox.communicator.getResponse();
+						name_response.data = $.map(name_response.data, function (value, key) { return value; });
+						
+						ServiceBox.communicator.searchData('car_wash', 'delegate', telephone_search_data);
+						var tel_response = ServiceBox.communicator.getResponse();
+						tel_response.data = $.map(tel_response.data, function (value, key) { return value; });
+						
+						var all_search = tel_response.data.concat(name_response.data);
+						
+						var result = {
+							suggestions : $.map(all_search, function(dataItem){
+								return { 'value' : dataItem.delegate_name+'('+dataItem.delegate_phone+')', 'data' : dataItem.delegate_name+'('+dataItem.delegate_phone+')', 'extra' : dataItem }
+							})
+						};
+						
+						done(result);
+					},
+					onSelect : function(suggestion){
+						$('#delegate_form .car-wash-delegate-form #delegate_name').val(suggestion.extra.delegate_name);
+						$('#delegate_form .car-wash-delegate-form #delegate_phone').val(suggestion.extra.delegate_phone);
+						
+						$('#delegate_form .car-wash-delegate-form form').append('<input type="hidden" name="delegate_id" id="delegate_id" value="'+suggestion.extra.id+'">');
+					}
+				});
 			}
 			
 			if ( status > 0 )
-			{
-				var id = $('.car-wash-car-list-table tbody tr.selected').data('car_id');
-				
+			{	
 				ServiceBox.communicator.updateData(context.slug, id, 'car', {status : status});
 				var response = ServiceBox.communicator.getResponse();
 				
 				if ( response.success )
 				{
-					$('.car-wash-content-holder').html('');
-					$('.car-wash-car-list-button').trigger('click');
+					parent.find('.car-wash-content-holder').html('');
+					parent.find('.car-wash-car-list-button').trigger('click');
 					
 					ServiceBox.popup.create('start_car', 'Spalare Masina', statusText);
 					ServiceBox.popup.run();
-					$('.car-wash-main').show();
-					$('.car-wash-list').hide();
+					parent.find('.car-wash-main').show();
+					parent.find('.car-wash-list').hide();
 				}
 				else
 				{
@@ -238,6 +292,8 @@ ServiceBox.temp_service =
 					ServiceBox.popup.run();
 				}
 			}
+			
+			context.setListColorNumbers();
 		});
 		
 		$('body').on('click', '.car-wash-add-car-form .add-car-form .big-input-button', function(){
@@ -251,6 +307,65 @@ ServiceBox.temp_service =
 				$(this).children('input').val(1);
 				$(this).addClass('selected');
 			}
+		});
+		
+		$('body').on('submit', '#delegate_form .car-wash-delegate-form form', function(e){
+			e.preventDefault();
+			
+			var car_id = $(this).find('#car_id').val();
+			var response = '';
+			if ( $(this).find('#delegate_id').length > 0 )
+			{
+				var delegate_id = $(this).find('#delegate_id').val();
+				
+				ServiceBox.communicator.updateData(context.slug, car_id, 'car', {status : 9, delegate_id : delegate_id});
+				response = ServiceBox.communicator.getResponse();
+			}
+			else
+			{
+				var form_data = $(this).serializeArray();
+				var obj = {};
+				for (var i = 0, l = form_data.length; i < l; i++) {
+					obj[form_data[i].name] = form_data[i].value;
+				}
+				form_data = obj;
+				
+				ServiceBox.communicator.insertData(context.slug, 'delegate', form_data);
+				
+				var delegate_response = ServiceBox.communicator.getResponse();
+				
+				if ( delegate_response.success )
+				{
+					var delegate_id = delegate_response.data;
+					ServiceBox.communicator.updateData(context.slug, car_id, 'car', {status : 9, delegate_id : delegate_id});
+					response = ServiceBox.communicator.getResponse();
+				}
+				else
+				{
+					response = delegate_response;
+				}
+			}
+			
+			if ( response.success )
+			{
+				$(this).parents('#delegate_form').remove();
+				$('.car-wash-car-list-button').trigger('click');
+				
+				ServiceBox.popup.create('start_car', 'Spalare Masina', 'Plata reusita');
+				ServiceBox.popup.run();
+			}
+			else
+			{
+				ServiceBox.popup.create('start_car', 'Spalare Masina', 'Cerere nereusita, incercati din nou.');
+				ServiceBox.popup.run();
+			}
+		});
+		
+		$('body').on('click', '.car-wash-back-home', function(){
+			var parent = $(this).parents(parentClass);
+			
+			parent.find('.car-wash-body').hide();
+			parent.find('.car-wash-main').show();
 		});
 		
 		$(window).resize(function(){
@@ -299,5 +414,66 @@ ServiceBox.temp_service =
 		} 
 		
 		return yyyy+'-'+mm+'-'+dd;
+	},
+	
+	initCarsAutocomplete : function() 
+	{
+		var context = this;
+		
+		$('.add-car-form #car_make').autocomplete({
+			minChars : 3,
+			lookup : function(query, done){
+				var search_data = {type : 'make', q : query};
+				
+				ServiceBox.communicator.performCustomAction('car_wash', 'SearchCars', search_data);
+				
+				var response = ServiceBox.communicator.getResponse();
+				var result = {
+					suggestions : $.map(response.data, function(dataItem){
+						return { 'value' : dataItem.name, 'data' : dataItem.name, 'extra' : dataItem }
+					})
+				};
+				
+				done(result);
+			},
+			onSelect: function (suggestion) {
+				context.selectedCarMake = suggestion.extra.id;
+			}
+		});
+		
+		$('body').on('change', '.add-car-form #car_make', function(){
+			if ( $(this).val() == 0 ) delete context.selectedCarMake;
+		});
+		
+		$('.add-car-form #car_type').autocomplete({
+			minChars : 3,
+			lookup : function(query, done){
+				var search_data = {type : 'model', q : query};
+				
+				if ( typeof context.selectedCarMake != undefined )
+				{
+					search_data.makeID = context.selectedCarMake;
+				}
+				
+				ServiceBox.communicator.performCustomAction('car_wash', 'SearchCars', search_data);
+				
+				var response = ServiceBox.communicator.getResponse();
+				var result = {
+					suggestions : $.map(response.data, function(dataItem){
+						return { 'value' : dataItem.name, 'data' : dataItem.name, 'extra' : dataItem }
+					})
+				};
+				
+				done(result);
+			}
+		});
+	},
+	
+	setListColorNumbers : function()
+	{
+		$('.car-wash-right-menu-legend .car-counter').remove();
+		$('.car-wash-right-menu-legend .legend-text').each(function(){
+			$(this).append(' <span class="car-counter">('+parseInt($('.car-wash-car-list-table tr.'+$(this).data('color_type')).length)+')</span>');
+		});
 	}
 }

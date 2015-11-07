@@ -42,9 +42,10 @@ ServiceBox.auth =
 	
 	checkBackIsLoggedIn : function()
 	{
-		ServiceBox.communicator.request.action = 'is_logged_in';
+		ServiceBox.communicator.request.action = 'IsLoggedIn';
 		ServiceBox.communicator.request.objectType = 'user';
 		ServiceBox.communicator.request.service = 'auth';
+		ServiceBox.communicator.request.type = 0;
 		ServiceBox.communicator.sendRequest(ServiceBox.communicator.request, true);
 		
 		var response = ServiceBox.communicator.getResponse();

@@ -117,11 +117,7 @@ var ServiceBox = {
 	 */
 	runSystem : function()
 	{
-		ServiceBox.auth.checkBackIsLoggedIn();
 		console.log('System ready');
-		
-		//$('#icon-link-car_wash').trigger('click');
-		//$('#window-car_wash .fullscreen-window').trigger('click');
 	},
 	
 	/**

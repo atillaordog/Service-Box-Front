@@ -18,28 +18,7 @@ ServiceBox.events =
 			
 			if ( slug in ServiceBox.services )
 			{
-				ServiceBox.communicator.request.action = 'service_needs_auth';
-				ServiceBox.communicator.request.objectType = 'blank';
-				ServiceBox.communicator.request.service = slug;
-				ServiceBox.communicator.sendRequest(ServiceBox.communicator.request);
-				
-				var response = ServiceBox.communicator.getResponse();
-				
-				if ( response.success )
-				{
-					if ( ServiceBox.auth.isLoggedIn )
-					{
-						ServiceBox.services[slug].run();
-					}
-					else
-					{
-						ServiceBox.auth.bringUpLogin();
-					}
-				}
-				else
-				{
-					ServiceBox.services[slug].run();
-				}
+				ServiceBox.services[slug].run();
 			}
 			else
 			{
@@ -90,7 +69,7 @@ ServiceBox.events =
 			}
 			form_data = obj;
 			
-			ServiceBox.communicator.request.action = 'login';
+			ServiceBox.communicator.request.action = 'Login';
 			ServiceBox.communicator.request.data = form_data;
 			ServiceBox.communicator.request.objectType = 'user';
 			ServiceBox.communicator.request.service = 'auth';
@@ -124,7 +103,7 @@ ServiceBox.events =
 		});
 		
 		$('body').on('click', '.servicebox-logout-button', function(){
-			ServiceBox.communicator.request.action = 'logout';
+			ServiceBox.communicator.request.action = 'Logout';
 			ServiceBox.communicator.request.objectType = 'user';
 			ServiceBox.communicator.request.service = 'auth';
 			ServiceBox.communicator.sendRequest(ServiceBox.communicator.request);
